@@ -15,9 +15,9 @@ input_prompt = """
                As an expert specializing in assessing the suitability of fruits and foods for individuals with hyperglycemia, your task involves analyzing input text describing various food items. Provide recommendations on whether individuals with hyperglycemia can include the mentioned food in their diet. If the food is deemed suitable, specify the recommended quantity for consumption.
                """
 
-def generate_gemini_text_response(text_model):
+def generate_gemini_text_response(text_model, user_input):
     try:
-        response = text_model.generate_content([input_prompt])
+        response = text_model.generate_content([input_prompt, user_input])
         return response.text
     except Exception as e:
         st.error(f"Error generating text response: {e}")
@@ -39,16 +39,14 @@ Powered by Google AI <img src="https://seeklogo.com/images/G/google-ai-logo-996E
 # Load the text model
 text_model = load_text_model()
 
+# User input for the food description
+user_input = st.text_area("Enter text describing a food item:")
+
 # Generate response button
 if st.button("Generate Response"):
-    response = generate_gemini_text_response(text_model)
+    response = generate_gemini_text_response(text_model, user_input)
     st.text("Generated Response:")
     st.write(response)
-
-
-
-
-
 
 
 
