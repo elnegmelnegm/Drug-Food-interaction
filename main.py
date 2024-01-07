@@ -1,29 +1,18 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Configure the API key
-genai.configure(api_key="AIzaSyCFPALEVIiwvWSREvVdBOzNd1VeyqQWt9o")
+@st.cache_resource
+def load_model() -> genai.GenerativeModel:
+    """
+    The function `load_model()` returns an instance of the `genai.GenerativeModel` class initialized with the model name
+    'gemini-pro'.
+    :return: an instance of the `genai.GenerativeModel` class.
+    """
+    model = genai.GenerativeModel('gemini-pro')
+    return model
 
-# Set up the model
-generation_config = {
-    "temperature": 0.4,
-    "top_p": 1,
-    "top_k": 32,
-    "max_output_tokens": 4096,
-}
-
-safety_settings = [
-    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-]
-
-model = genai.GenerativeModel(
-    model_name="gemini-pro",
-    generation_config=generation_config,
-    safety_settings=safety_settings,
-)
+# Load the model
+model = load_model()
 
 # Define input prompt globally
 input_prompt = """
@@ -31,7 +20,7 @@ input_prompt = """
                """
 
 def generate_gemini_response_text(input_text):
-    prompt_parts = [input_prompt, {"text": input_text, "lang": "en"}]
+    prompt_parts = [input_prompt, {"text": input_text}]
     
     try:
         response = model.generate_content(prompt_parts)
