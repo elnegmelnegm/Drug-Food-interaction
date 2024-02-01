@@ -12,7 +12,7 @@ def load_text_model() -> genai.GenerativeModel:
 
 # Define input prompt for hyperglycemia
 input_prompt = """
-                As an expert specializing in assessing the suitability of food items in the context of potential interactions with drugs, your task involves analyzing input text describing various food items. Provide recommendations on whether individuals, particularly those with specific health conditions, can include the mentioned food in their diet. If the food is deemed suitable, specify the recommended quantity for consumption. Use English and Arabic languages for the response.
+                As an expert specializing in assessing the suitability of food items in the context of potential interactions with drugs, your task involves analyzing input text describing various food items. Provide recommendations on whether individuals, particularly those with specific health conditions, can include the mentioned food in their diet. If the food is deemed suitable, specify the recommended quantity for consumption. Use Arabic languages for the response.
                """
 
 def generate_gemini_text_response(text_model, user_input):
