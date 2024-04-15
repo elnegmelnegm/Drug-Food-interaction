@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Configure the API key
-genai.configure(api_key="AIzaSyCSmgIdp4ui5ra41OhWBCwj2FYQj3ACdi0")
+genai.configure(api_key="AIzaSyDsyITRwraD81NCnoVhW92szOHpvjVJFCE")
 
 # Load the text generation model
 @st.cache(allow_output_mutation=True)
